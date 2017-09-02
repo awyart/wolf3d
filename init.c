@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 18:54:59 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/02 19:23:13 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/02 20:56:31 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,11 @@ int	ft_init_mlx(t_env *env)
 	if (!(env->mlx = mlx_init()))
 		return (0);
 	env->win = mlx_new_window(env->mlx, WINX, WINY, "WOlF3D enfin presque");
-	env->x = XI;
-	env->y = YI;
+	env->posX = posXI;
+	env->posY = posYI;
+	env->dirX = dirXI;
+	env->dirY = dirYI;
+	env->planeX = planeXI;
+	env->planeY = planeYI;
 	return (1);
 }

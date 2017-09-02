@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:27:07 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/02 19:22:37 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/02 21:45:49 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 #include <sys/uio.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <math.h>
 #include "mlx.h"
 
 # define BUFF_SIZE 1000
-# define XI 2
-# define YI 2
+# define posXI 2
+# define posYI 2
+# define dirXI -1
+# define dirYI 0
+# define planeXI 0
+# define planeYI 0.66
 # define WINX 800
 # define WINY 600
 # define NBEVE 1
@@ -37,15 +42,38 @@ typedef struct			s_env
 	char				**map;
 	int					x_max;
 	int					y_max;
-	int					x;
-	int					y;
+	double				posX;
+	double				posY;
+	double				dirX;
+	double				dirY;
+	double				planeX;
+	double				planeY;				
+	double				a;
 }						t_env;
 
 typedef struct			s_ev
-{	
+{
 	int					key;
 	void				(*f)(t_env *env);
 }						t_ev;
+
+typedef struct			s_ray
+{
+	double				posX;
+	double				posY;
+	double				dirX;
+	double				dirY;
+	int					mapX;
+	int					mapY;
+	double				sideDistX;
+	double				sideDistY;
+	double				deltaDistX;
+	double				deltaDistY;
+	int 				stepX;
+	int 				stepY;
+	int 				hit;
+	int 				side;
+}						t_ray;
 
 void					ft_putchar(char c);
 void					ft_putstr(char *str);
@@ -65,7 +93,6 @@ void					ft_read(t_env *env, char *title);
 void					ft_putmap(t_env *env);
 void					ft_putnbr(int n);
 int						ft_init_mlx(t_env *env);
-
 
 
 

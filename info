@@ -1,0 +1,15 @@
+Wolf3D
+
+Pour fontionner: compiler l'executable avec la carte du niveau
+
+-> lire la carte et stocker l'info
+
+-> ouvrir la fenetre en faisant apparaitre le joueur a une position (X, Y)
+	gerer les cas de bases d'une fenetre minilibx
+
+-> generer l'ecran
+	-la position xy
+	-l'angle de vision
+	-la hauteur
+
+->

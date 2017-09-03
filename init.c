@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 18:54:59 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/02 20:56:31 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/03 19:47:32 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_putmap(t_env *env)
 	int y;
 
 	y = 0;
-	while (y < env->y_max)
+	while (y < env->y_max + 2)
 	{
 		ft_putstr(env->map[y]);
 		ft_putchar('\n');
@@ -32,23 +32,40 @@ void		ft_read(t_env *env, char *title)
 	int fd;
 	char *line;
 
-	y = 0;
-	x = 0;
+	y = 1;
+	x = -1;
 	fd = open(title, O_RDONLY);
-	env->map = (char**)malloc(sizeof(char*) * env->y_max);
+	env->map = (char**)malloc(sizeof(char*) * (env->y_max + 3));
+	env->map[0] = (char*)malloc(sizeof(char) * (env->x_max + 3));
+	while (++x <= env->x_max + 1)
+		env->map[0][x] = 49;
+	env->map[0][x] = '\0';
+	x = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
-		env->map[y] = (char*)malloc(sizeof(char) * env->x_max);
+		env->map[y] = (char*)malloc(sizeof(char) * (env->x_max + 3));
+		env->map[y][0] = 49;
 		while (line[x] != '\0')
 		{
-			env->map[y][x] = line[x];
+			env->map[y][x + 1] = line[x];
 			x++;
 		}
+		while (x <= env->x_max + 1)
+		{
+			env->map[y][x] = 49;
+			x++;
+		}
+		env->map[y][x] = '\0';
 		x = 0;
 		y++;
 		if (line)
 			free(line);
 	}
+	env->map[y] = (char*)malloc(sizeof(char) * (env->x_max + 3));
+	x = -1;
+	while (++x <= env->x_max + 1)
+		env->map[y][x] = 49;
+	env->map[y][x] = '\0';
 	close(fd);
 }
 
@@ -61,6 +78,7 @@ void ft_getsize(t_env *env, char *title)
 
 	x = 0;
 	y = 0;
+	env->x_max = 0;
 	fd = open(title, O_RDONLY);
 	while (get_next_line(fd, &line) > 0)
 	{
@@ -70,6 +88,7 @@ void ft_getsize(t_env *env, char *title)
 			env->x_max = x;
 	}
 	env->y_max = y;
+	//ft_putnbr(env->y_max);
 	close(fd);
 }
 

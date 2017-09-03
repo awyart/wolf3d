@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:27:07 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/02 21:45:49 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/03 20:30:59 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,19 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
 #include "mlx.h"
 
 # define BUFF_SIZE 1000
-# define posXI 2
-# define posYI 2
+# define posXI 3
+# define posYI 3
 # define dirXI -1
 # define dirYI 0
 # define planeXI 0
 # define planeYI 0.66
-# define WINX 800
-# define WINY 600
-# define NBEVE 1
+# define WINX 1920
+# define WINY 1080
+# define NBEVE 7
 
 
 typedef struct			s_env
@@ -49,6 +50,7 @@ typedef struct			s_env
 	double				planeX;
 	double				planeY;				
 	double				a;
+	double 				camX;
 }						t_env;
 
 typedef struct			s_ev
@@ -73,6 +75,10 @@ typedef struct			s_ray
 	int 				stepY;
 	int 				hit;
 	int 				side;
+	double 				wall;
+	int 				ymin;
+	int 				ymax;
+	int 				h;
 }						t_ray;
 
 void					ft_putchar(char c);
@@ -95,8 +101,22 @@ void					ft_putnbr(int n);
 int						ft_init_mlx(t_env *env);
 
 
+void					ft_create_img(t_env *env);
+void					ft_display_img(t_env *env);
+
+void					ft_put_px(t_env *env, t_ray *ray, int x, int y);
+void					ft_put_px_sol(t_env *env, int x, int y);
+void					ft_put_px_plafond(t_env *env, int x, int y);
+
+
 
 void					ft_exit(t_env *env);
+void					ft_mvfw(t_env *env);
+void					ft_mvbw(t_env *env);
+void					ft_mvleft(t_env *env);
+void					ft_mvright(t_env *env);
+void					ft_roleft(t_env *env);
+void					ft_roright(t_env *env);
 
 
 #endif

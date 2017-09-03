@@ -6,7 +6,7 @@
 #    By: awyart <awyart@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/28 22:10:59 by awyart            #+#    #+#              #
-#    Updated: 2017/09/02 19:05:51 by awyart           ###   ########.fr        #
+#    Updated: 2017/09/03 20:32:59 by awyart           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,12 @@ SRC2 = ft_putchar.c \
 	ft_memalloc.c \
 	ft_putnbr.c
 
-SRC3 = ft_launch.c
+SRC3 = ft_launch.c \
+		img.c \
+		putpx.c
 
-SRC4 = ft_exit.c
+SRC4 = ft_exit.c \
+		ft_mv.c
 
 SRC = $(SRC1) \
 	  $(patsubst %,srcs/utility/%,$(SRC2)) \

@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:19:38 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/03 20:32:24 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/04 18:02:19 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void ft_gety(t_ray *ray)
 		ray->wall = (ray->mapX - ray->posX + (1 - ray->stepX) / 2) / ray->dirX;
 	else 
 		ray->wall = (ray->mapY - ray->posY + (1 - ray->stepY) / 2) / ray->dirY;
-	ray->h = 1.5 * (int)(WINY / ray->wall);
+	ray->h = 1.0 * (int)(WINY / ray->wall);
 	ray->ymin = (int)(WINY / 2 - ray->h / 2);
 	ray->ymax = (int)(WINY / 2 + ray->h / 2);
 	if (ray->ymin < 0)
@@ -91,7 +91,8 @@ int ft_launch(t_env *env)
 	int		px;
 	int		py;
 	t_ray	ray;
-
+	
+	
 	px = 0;
 	ft_create_img(env);
 	while (px <= WINX)

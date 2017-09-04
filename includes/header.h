@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:27:07 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/03 20:30:59 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/04 18:02:56 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 #include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 #include "mlx.h"
+#include "bmp.h"
 
 # define BUFF_SIZE 1000
 # define posXI 3
@@ -32,6 +34,8 @@
 # define WINX 1920
 # define WINY 1080
 # define NBEVE 7
+# define MVSPEED 0.5
+# define ANGLE 0.1
 
 
 typedef struct			s_env
@@ -50,7 +54,9 @@ typedef struct			s_env
 	double				planeX;
 	double				planeY;				
 	double				a;
+	int 				x;
 	double 				camX;
+	t_desc 				*desc;
 }						t_env;
 
 typedef struct			s_ev
@@ -107,8 +113,10 @@ void					ft_display_img(t_env *env);
 void					ft_put_px(t_env *env, t_ray *ray, int x, int y);
 void					ft_put_px_sol(t_env *env, int x, int y);
 void					ft_put_px_plafond(t_env *env, int x, int y);
+int						mouse_click_hook(int key);
+int						mouse_move_hook(int x, int y, t_env *env);
 
-
+t_desc 					*ft_read_img(char *str);
 
 void					ft_exit(t_env *env);
 void					ft_mvfw(t_env *env);

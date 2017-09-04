@@ -6,13 +6,12 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:53:43 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/03 18:11:42 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/04 18:23:07 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-# define MVSPEED 0.5
-# define ANGLE 0.1
+# define FACTOR 1.001
 
 void	ft_mvfw(t_env *env)
 {
@@ -56,26 +55,46 @@ void	ft_mvright(t_env *env)
 
 void	ft_roleft(t_env *env)
 {
+	double dx;
+	double dy;
+	double px;
+	double py;
+
+	dx = env->dirX;
+	dy = env->dirY;
+	px = env->planeX;
+	py = env->planeY;
+	//printf("%f\n", sqrt(env->dirX * env->dirX + env->dirY * env->dirY));
 	env->dirX = cos(ANGLE) * env->dirX - sin(ANGLE) * env->dirY;
 	env->dirY = sin(ANGLE) * env->dirX + cos(ANGLE) * env->dirY;
-	env->dirX *= 1.0 / sqrt(env->dirX * env->dirX + env->dirY * env->dirY);
-	env->dirY *= 1.0 / sqrt(env->dirX * env->dirX + env->dirY * env->dirY);
+	env->dirX *= FACTOR / sqrt(env->dirX * env->dirX + env->dirY * env->dirY); 
+	env->dirY *= FACTOR / sqrt(env->dirX * env->dirX + env->dirY * env->dirY);
 	env->planeX = cos(ANGLE) * env->planeX - sin(ANGLE) * env->planeY;
 	env->planeY = sin(ANGLE) * env->planeX + cos(ANGLE) * env->planeY;
-	env->planeX *= 1.0 / sqrt(env->planeX * env->planeX + env->planeY * env->planeY);
-	env->planeY *= 1.0 / sqrt(env->planeX * env->planeX + env->planeY * env->planeY);
+	env->planeX *= FACTOR / sqrt(env->planeX * env->planeX + env->planeY * env->planeY); 
+	env->planeY *= FACTOR / sqrt(env->planeX * env->planeX + env->planeY * env->planeY);
 	ft_launch(env);
 }
 
 void	ft_roright(t_env *env)
 {
+	double dx;
+	double dy;
+	double px;
+	double py;
+
+	dx = env->dirX;
+	dy = env->dirY;
+	px = env->planeX;
+	py = env->planeY;
+	//printf("%f\n", sqrt(env->dirX * env->dirX + env->dirY * env->dirY));
 	env->dirX = cos(-ANGLE) * env->dirX - sin(-ANGLE) * env->dirY;
 	env->dirY = sin(-ANGLE) * env->dirX + cos(-ANGLE) * env->dirY;
-	env->dirX *= 1.0 / sqrt(env->dirX * env->dirX + env->dirY * env->dirY);
-	env->dirY *= 1.0 / sqrt(env->dirX * env->dirX + env->dirY * env->dirY);
+	env->dirX *= FACTOR / sqrt(env->dirX * env->dirX + env->dirY * env->dirY); 
+	env->dirY *= FACTOR / sqrt(env->dirX * env->dirX + env->dirY * env->dirY);
 	env->planeX = cos(-ANGLE) * env->planeX - sin(-ANGLE) * env->planeY;
 	env->planeY = sin(-ANGLE) * env->planeX + cos(-ANGLE) * env->planeY;
-	env->planeX *= 1.0 / sqrt(env->planeX * env->planeX + env->planeY * env->planeY);
-	env->planeY *= 1.0 / sqrt(env->planeX * env->planeX + env->planeY * env->planeY);
+	env->planeX *= FACTOR / sqrt(env->planeX * env->planeX + env->planeY * env->planeY); 
+	env->planeY *= FACTOR / sqrt(env->planeX * env->planeX + env->planeY * env->planeY);
 	ft_launch(env);
 }

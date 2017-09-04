@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:14:05 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/03 20:22:51 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/04 18:34:39 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,13 @@ int 		ft_checkmap(t_env *env)
 int			main(int ac, char **av)
 {
 	t_env env;
+	char *str = "/Users/awyart/Desktop/aw_128.bmp";
 
 	if (ac != 2)
-	{
 		ft_putstr("Le nombre d'argument est incorrect\n");
-		return (0);
-	}
 	else
 	{
+		env.desc = ft_read_img(str);
 		ft_getsize(&(env),av[1]);
 		ft_read(&(env), av[1]);
 		ft_putmap(&(env));
@@ -94,7 +93,9 @@ int			main(int ac, char **av)
 		mlx_key_hook(env.win, my_key_func, &(env));
 		mlx_expose_hook(env.win, &ft_launch, &(env));
 		mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &my_key_func, &env);
+		mlx_mouse_hook(env.win, mouse_click_hook, &env);
+		mlx_hook(env.win, 6, (1L << 6), mouse_move_hook, &env);
 		mlx_loop(env.mlx);
-		return (0);
 	}
+	return (0);
 }

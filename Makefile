@@ -6,7 +6,7 @@
 #    By: awyart <awyart@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/28 22:10:59 by awyart            #+#    #+#              #
-#    Updated: 2017/09/03 20:32:59 by awyart           ###   ########.fr        #
+#    Updated: 2017/09/04 17:49:04 by awyart           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,16 @@ SRC3 = ft_launch.c \
 		putpx.c
 
 SRC4 = ft_exit.c \
-		ft_mv.c
+		ft_mv.c \
+		mouse.c\
+
+SRC5 = read.c
 
 SRC = $(SRC1) \
 	  $(patsubst %,srcs/utility/%,$(SRC2)) \
 	  $(patsubst %,srcs/launch/%,$(SRC3)) \
 	  $(patsubst %,srcs/event/%,$(SRC4)) \
+	  $(patsubst %,srcs/texture/%,$(SRC5)) \
 
 IPATH = includes
 VPATH = srcs

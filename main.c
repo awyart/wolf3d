@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:14:05 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/04 18:34:39 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/04 18:42:34 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int 		ft_checkmap(t_env *env)
 int			main(int ac, char **av)
 {
 	t_env env;
-	char *str = "/Users/awyart/Desktop/aw_128.bmp";
+	char *str = "./aw_128.bmp";
 
 	if (ac != 2)
 		ft_putstr("Le nombre d'argument est incorrect\n");

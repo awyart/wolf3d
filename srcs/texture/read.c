@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 12:58:27 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/05 18:27:57 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/05 18:58:50 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,15 @@ t_desc 	*ft_read_img(char *str)
 	j = 0;
 	while (x < (img.width) * (img.height))
 	{
+		//printf("x: %d i: %d j:%d\n", x, i ,j);
 		read(fd, &desc->img[img.height - j - 1][img.width - i - 1][0], 1);
+		//printf("rouge:%d\n", desc->img[j - 1][img.width - i - 1][0]);
 		read(fd, &desc->img[img.height - j - 1][img.width - i - 1][1], 1);
+		//printf("vert:%d\n", desc->img[j] - 1[iimg.width - ] - 1[1]);
 		read(fd, &desc->img[img.height - j - 1][img.width - i - 1][2], 1);
+		//printf("blue:%d\n", desc->img[j] - 1[iimg.width - ] - 1[2]);
 		read(fd, &desc->img[img.height - j - 1][img.width - i - 1][3], 1);
+		//printf("other:%d\n", desc->img[j][i][3]);
 		i++;
 		if (i >= img.width)
 		{
@@ -91,7 +96,6 @@ t_desc 	*ft_read_img(char *str)
 	int i = -1;
 	int j = -1;
 	int x = 0;
-
 	desc = ft_read_img(av[1]);
 	printf("ok\n");
 	return (0);

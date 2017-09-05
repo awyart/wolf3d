@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 11:43:55 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/04 18:25:05 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/05 16:39:10 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int		mouse_click_hook(int key)
 	ft_putnbr(key);
 	ft_putchar('\n');
 	return (0);
-
 }
 
 int		mouse_move_hook(int x1, int y1, t_env *env)

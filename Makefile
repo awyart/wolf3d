@@ -6,7 +6,7 @@
 #    By: awyart <awyart@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/28 22:10:59 by awyart            #+#    #+#              #
-#    Updated: 2017/09/04 17:49:04 by awyart           ###   ########.fr        #
+#    Updated: 2017/09/05 18:08:12 by awyart           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC3 = ft_launch.c \
 SRC4 = ft_exit.c \
 		ft_mv.c \
 		mouse.c\
+		event.c
 
 SRC5 = read.c
 
@@ -54,7 +55,7 @@ LIB = /usr/local/lib/libmlx.a
 all : $(NAME)
 
 $(NAME) : $(SRC)
-	@$(CC) $(FLAGS) -o $(NAME) $^ $(LIB) -I $(IPATH) $(GRAPH)
+	@$(CC) $(FLAGS) -o $(NAME) $^ $(LIB) -I $(IPATH) $(GRAPH) -g
 
 clean :
 	@rm -f $(OBJ)

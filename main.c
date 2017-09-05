@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:14:05 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/04 18:42:34 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/05 18:14:50 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	ft_define1_ev(t_ev ev[NBEVE])
 	ev[4].key = 124;	//>
 	ev[5].key = 0;//A
 	ev[6].key = 2;//D
+	ev[7].key = 17;
 }
 
 static void	ft_define2_ev(t_ev ev[NBEVE])
@@ -34,6 +35,7 @@ static void	ft_define2_ev(t_ev ev[NBEVE])
 	ev[4].f = &ft_mvright;
 	ev[5].f = &ft_roleft;
 	ev[6].f = &ft_roright;
+	ev[7].f = &ft_event;
 }
 
 int			my_key_func(int keycode, t_env *env)
@@ -69,24 +71,38 @@ int 		ft_checkmap(t_env *env)
 	return (0);
 }
 
+void 		ft_err_map(void)
+{
+	ft_putstr("erreur dans le chargement de la map, spawn indesirable\n");
+	exit(0);	
+}
+
+void		ft_load_texture(t_env *env)
+{
+	env->desc[2] = ft_read_img("./texture/bluestone.bmp");
+	env->desc[1] = ft_read_img("./texture/eagle.bmp");
+	env->desc[0] = ft_read_img("./texture/redbrick.bmp");
+	env->desc[3] = ft_read_img("./texture/colorstone.bmp");
+	env->desc[4] = ft_read_img("./texture/purplestone.bmp");
+	env->desc[5] = ft_read_img("./texture/aeratio.bmp");
+
+}
+
 int			main(int ac, char **av)
 {
 	t_env env;
-	char *str = "./aw_128.bmp";
-
+	
 	if (ac != 2)
 		ft_putstr("Le nombre d'argument est incorrect\n");
 	else
 	{
-		env.desc = ft_read_img(str);
+
+		ft_load_texture(&env);
 		ft_getsize(&(env),av[1]);
 		ft_read(&(env), av[1]);
 		ft_putmap(&(env));
 		if (!(ft_checkmap(&env)))
-		{
-			ft_putstr("erreur dans le chargement de la map, spawn indesirable\n");
-			exit(0);
-		}
+			ft_err_map();
 		if (!(ft_init_mlx(&(env))))
 			return (0);
 		ft_launch(&(env));

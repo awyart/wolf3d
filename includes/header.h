@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:27:07 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/04 18:02:56 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/05 18:54:50 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 # define planeYI 0.66
 # define WINX 1920
 # define WINY 1080
-# define NBEVE 7
+# define NBEVE 8
 # define MVSPEED 0.5
 # define ANGLE 0.1
 
@@ -56,7 +56,7 @@ typedef struct			s_env
 	double				a;
 	int 				x;
 	double 				camX;
-	t_desc 				*desc;
+	t_desc 				*desc[6];
 }						t_env;
 
 typedef struct			s_ev
@@ -82,9 +82,14 @@ typedef struct			s_ray
 	int 				hit;
 	int 				side;
 	double 				wall;
+	double 				wallX;
+	int 				texNum;
 	int 				ymin;
 	int 				ymax;
+	int 				texX;
 	int 				h;
+	int 				nbtex;
+	int 				dep;
 }						t_ray;
 
 void					ft_putchar(char c);
@@ -117,13 +122,15 @@ int						mouse_click_hook(int key);
 int						mouse_move_hook(int x, int y, t_env *env);
 
 t_desc 					*ft_read_img(char *str);
-
+void 					ft_display_minimap(t_env *env);
+	
 void					ft_exit(t_env *env);
 void					ft_mvfw(t_env *env);
 void					ft_mvbw(t_env *env);
 void					ft_mvleft(t_env *env);
 void					ft_mvright(t_env *env);
 void					ft_roleft(t_env *env);
+void 					ft_event(t_env *env);
 void					ft_roright(t_env *env);
 
 

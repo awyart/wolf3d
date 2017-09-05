@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:19:38 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/04 18:02:19 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/05 18:10:49 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,20 +80,25 @@ static void ft_gety(t_ray *ray)
 	ray->h = 1.0 * (int)(WINY / ray->wall);
 	ray->ymin = (int)(WINY / 2 - ray->h / 2);
 	ray->ymax = (int)(WINY / 2 + ray->h / 2);
+	ray->dep = ray->ymin;
 	if (ray->ymin < 0)
 		ray->ymin = 0;
 	if (ray->ymax >= WINY)
 		ray->ymax = WINY - 1;
+
+
 }
+
+
 
 int ft_launch(t_env *env)
 {
 	int		px;
 	int		py;
 	t_ray	ray;
-	
-	
+
 	px = 0;
+	
 	ft_create_img(env);
 	while (px <= WINX)
 	{
@@ -102,14 +107,28 @@ int ft_launch(t_env *env)
 		ft_ray(env, &ray);
 		ft_gety(&ray);
 		py = -1;
+		ray.nbtex = env->map[ray.mapY][ray.mapX] - 49;
+		if (ray.side == 0)
+			ray.wallX = ray.posY + ray.wall * ray.dirY;
+		else
+			ray.wallX = ray.posX + ray.wall * ray.dirX;
+			ray.wallX -= floor(ray.wallX);
+		ray.texX = (int)(ray.wallX * (double)env->desc[ray.nbtex]->width);
+		if (ray.side == 0 && ray.dirX > 0)
+		 	ray.texX = env->desc[ray.nbtex]->width - ray.texX - 1;
+		if (ray.side == 1 && ray.dirY < 0)
+			ray.texX = env->desc[ray.nbtex]->width - ray.texX - 1;
 		while (++py < ray.ymin)
-			ft_put_px_sol(env, px, py);
+				ft_put_px_sol(env,px, py);
 		while (++py < ray.ymax)
-			ft_put_px(env, &ray, px, py);
+		 	ft_put_px(env, &ray, px, py);
 		while (++py < WINY)
 			ft_put_px_plafond(env, px, py);
 		px++;
 	}
+	ft_display_minimap(env);
 	ft_display_img(env);
+	printf("x:%f\n",env->posX);
+	printf("x%f\n",env->posY);
 	return (1);
 }

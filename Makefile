@@ -6,7 +6,7 @@
 #    By: awyart <awyart@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/28 22:10:59 by awyart            #+#    #+#              #
-#    Updated: 2017/09/05 18:08:12 by awyart           ###   ########.fr        #
+#    Updated: 2017/09/06 19:21:14 by awyart           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ NAME = wolf3D
 GRAPH = -framework OpenGL -framework AppKit
 FLAGS = -Werror -Wall -Wextra
 SRC1 = main.c\
-		init.c
+		init.c\
+		init2.c
 
 SRC2 = ft_putchar.c \
 	ft_putstr.c \
@@ -31,17 +32,18 @@ SRC2 = ft_putchar.c \
 	ft_putnbr.c
 
 SRC3 = ft_launch.c \
-		img.c \
-		putpx.c
+		putpx.c \
+		calc.c
 
 SRC4 = ft_exit.c \
 		ft_mv.c \
 		mouse.c\
-		event.c
+		event.c\
+		lat.c
 
 SRC5 = read.c
 
-SRC = $(SRC1) \
+SRC = $(patsubst %,srcs//%,$(SRC1)) \
 	  $(patsubst %,srcs/utility/%,$(SRC2)) \
 	  $(patsubst %,srcs/launch/%,$(SRC3)) \
 	  $(patsubst %,srcs/event/%,$(SRC4)) \
@@ -55,7 +57,7 @@ LIB = /usr/local/lib/libmlx.a
 all : $(NAME)
 
 $(NAME) : $(SRC)
-	@$(CC) $(FLAGS) -o $(NAME) $^ $(LIB) -I $(IPATH) $(GRAPH) -g
+	@$(CC) $(FLAGS) -o $(NAME) $^ $(LIB) -I $(IPATH) $(GRAPH)
 
 clean :
 	@rm -f $(OBJ)

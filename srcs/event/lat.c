@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   event.c                                            :+:      :+:    :+:   */
+/*   lat.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/05 18:02:48 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/06 18:51:24 by awyart           ###   ########.fr       */
+/*   Created: 2017/09/06 18:53:45 by awyart            #+#    #+#             */
+/*   Updated: 2017/09/06 18:54:03 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void ft_event(t_env *env)
+void	ft_mvleft(t_env *env)
 {
-	if (env->posX < 4.0 && env->posX > 3.0 && env->posY < 20.0 && env->posY > 19.0)
+	if (env->map[(int)(env->posY + 0.4 * MVSPEED * env->dirX)][(int)(env->posX - 0.2 * MVSPEED * env->dirY)] == 48)
 	{
-		env->posX = 6;
-		env->posY = 19;
-		
-		ft_launch(env);
+		env->posX += 0.2 * MVSPEED * env->dirY;
+		env->posY -= 0.2 * MVSPEED * env->dirX;
 	}
 	ft_launch(env);
 }
 
-void ft_star(t_env *env)
+void	ft_mvright(t_env *env)
 {
-	env->etoile += 1;
-	env->etoile %= 2;
-	ft_launch(env);
-}
-
-void ft_lay(t_env *env)
-{
-	env->lay += 1;
-	env->lay %= 2;
+	if (env->map[(int)(env->posY - 0.4 * MVSPEED * env->dirX)][(int)(env->posX + 0.2 * MVSPEED * env->dirY)] == 48)
+	{
+		env->posX -= 0.2 * MVSPEED * env->dirY;
+		env->posY += 0.2 * MVSPEED * env->dirX;
+	}
 	ft_launch(env);
 }

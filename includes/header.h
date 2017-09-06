@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
@@ -33,9 +33,10 @@
 # define planeYI 0.66
 # define WINX 1920
 # define WINY 1080
-# define NBEVE 8
+# define NBEVE 14
 # define MVSPEED 0.5
 # define ANGLE 0.1
+# define FACTOR 1.001
 
 
 typedef struct			s_env
@@ -43,7 +44,7 @@ typedef struct			s_env
 	void				*mlx;
 	void				*win;
 	void				*img;
-	char 				*pix;
+	char				*pix;
 	char				**map;
 	int					x_max;
 	int					y_max;
@@ -54,9 +55,16 @@ typedef struct			s_env
 	double				planeX;
 	double				planeY;				
 	double				a;
-	int 				x;
-	double 				camX;
-	t_desc 				*desc[6];
+	int					x;
+	double				camX;
+	double				floorX;
+	double				floorY;
+	double				distWall;
+	double				distPlayer;
+	double				currentDist;
+	t_desc				*desc[9];
+	int					etoile;
+	int					lay;
 }						t_env;
 
 typedef struct			s_ev
@@ -77,21 +85,24 @@ typedef struct			s_ray
 	double				sideDistY;
 	double				deltaDistX;
 	double				deltaDistY;
-	int 				stepX;
-	int 				stepY;
-	int 				hit;
-	int 				side;
-	double 				wall;
-	double 				wallX;
-	int 				texNum;
-	int 				ymin;
-	int 				ymax;
-	int 				texX;
-	int 				h;
-	int 				nbtex;
-	int 				dep;
+	int					stepX;
+	int					stepY;
+	int					hit;
+	int					side;
+	double				wall;
+	double				wallX;
+	int					texNum;
+	int					ymin;
+	int					ymax;
+	int					texX;
+	int					h;
+	int					nbtex;
+	int					dep;
 }						t_ray;
 
+int 					ft_checkmap(t_env *env);
+void 					ft_err_map(void);
+void					ft_load_texture(t_env *env);
 void					ft_putchar(char c);
 void					ft_putstr(char *str);
 int						ft_strlen(char *str);
@@ -110,29 +121,24 @@ void					ft_read(t_env *env, char *title);
 void					ft_putmap(t_env *env);
 void					ft_putnbr(int n);
 int						ft_init_mlx(t_env *env);
-
-
-void					ft_create_img(t_env *env);
-void					ft_display_img(t_env *env);
-
 void					ft_put_px(t_env *env, t_ray *ray, int x, int y);
-void					ft_put_px_sol(t_env *env, int x, int y);
-void					ft_put_px_plafond(t_env *env, int x, int y);
+void					ft_put_px_sol(t_env *env, t_ray *ray, int x, int y);
+void					ft_put_px_plafond(t_env *env,t_ray *ray, int x, int y);
 int						mouse_click_hook(int key);
 int						mouse_move_hook(int x, int y, t_env *env);
-
-t_desc 					*ft_read_img(char *str);
+t_desc					*ft_read_img(char *str);
 void 					ft_display_minimap(t_env *env);
-	
 void					ft_exit(t_env *env);
 void					ft_mvfw(t_env *env);
 void					ft_mvbw(t_env *env);
 void					ft_mvleft(t_env *env);
 void					ft_mvright(t_env *env);
 void					ft_roleft(t_env *env);
-void 					ft_event(t_env *env);
+void					ft_event(t_env *env);
 void					ft_roright(t_env *env);
-
+void					ft_star(t_env *env);
+void					ft_lay(t_env *env);
+void					ft_init_calc(int px, t_env *env, t_ray *ray);
 
 #endif
 

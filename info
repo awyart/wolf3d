@@ -2,4 +2,5 @@ verifier en profonderur la map
 verifier limage
 securiser les mallocs et les variables
 continuer les leaks
+ajouter les fonctions recode (memdel, memset, bzero...)
 norminette

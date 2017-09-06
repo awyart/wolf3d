@@ -33,7 +33,7 @@
 # define planeYI 0.66
 # define WINX 1920
 # define WINY 1080
-# define NBEVE 14
+# define NBEVE 15
 # define MVSPEED 0.5
 # define ANGLE 0.1
 # define FACTOR 1.001
@@ -139,6 +139,8 @@ void					ft_roright(t_env *env);
 void					ft_star(t_env *env);
 void					ft_lay(t_env *env);
 void					ft_init_calc(int px, t_env *env, t_ray *ray);
+void 					ft_build(t_env *env);
+
 
 #endif
 

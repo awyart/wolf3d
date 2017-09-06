@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:19:38 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/06 19:00:30 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/06 19:49:29 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int ft_launch(t_env *env)
 	t_ray	ray;
 
 	px = 0;
+
 	ft_create_img(env);
 	while (px <= WINX)
 	{

@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:14:05 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/06 19:22:47 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/06 20:21:28 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	ft_define1_ev(t_ev ev[NBEVE])
 	ev[11].key = 125;
 	ev[12].key = 83;
 	ev[13].key = 84;
+	ev[14].key = 11;
 
 }
 
@@ -49,6 +50,7 @@ static void	ft_define2_ev(t_ev ev[NBEVE])
 	ev[11].f = &ft_mvbw;
 	ev[12].f = &ft_star;
 	ev[13].f = &ft_lay;
+	ev[14].f = &ft_build;
 }
 
 static int			my_key_func(int keycode, t_env *env)
@@ -79,12 +81,11 @@ static void ft_free_mem(t_env *env)
 int			main(int ac, char **av)
 {
 	t_env env;
-	
+
 	if (ac != 2)
 		ft_putstr("Le nombre d'argument est incorrect\n");
 	else
 	{
-		
 		ft_load_texture(&env);
 		ft_getsize(&(env),av[1]);
 		ft_read(&(env), av[1]);

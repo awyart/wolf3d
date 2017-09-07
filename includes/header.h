@@ -33,10 +33,11 @@
 # define planeYI 0.66
 # define WINX 1920
 # define WINY 1080
-# define NBEVE 15
+# define NBEVE 20
 # define MVSPEED 0.5
 # define ANGLE 0.1
 # define FACTOR 1.001
+# define NBIMG 9
 
 
 typedef struct			s_env
@@ -62,9 +63,10 @@ typedef struct			s_env
 	double				distWall;
 	double				distPlayer;
 	double				currentDist;
-	t_desc				*desc[9];
+	t_desc				*desc[NBIMG];
 	int					etoile;
 	int					lay;
+	int 				drawmap;
 }						t_env;
 
 typedef struct			s_ev
@@ -100,8 +102,7 @@ typedef struct			s_ray
 	int					dep;
 }						t_ray;
 
-int 					ft_checkmap(t_env *env);
-void 					ft_err_map(void);
+void					ft_checkmap(t_env *env);
 void					ft_load_texture(t_env *env);
 void					ft_putchar(char c);
 void					ft_putstr(char *str);
@@ -118,17 +119,16 @@ void					*ft_memalloc(size_t size);
 int						ft_launch(t_env *env);
 void					ft_getsize(t_env *env, char *title);
 void					ft_read(t_env *env, char *title);
-void					ft_putmap(t_env *env);
 void					ft_putnbr(int n);
 int						ft_init_mlx(t_env *env);
 void					ft_put_px(t_env *env, t_ray *ray, int x, int y);
 void					ft_put_px_sol(t_env *env, t_ray *ray, int x, int y);
 void					ft_put_px_plafond(t_env *env,t_ray *ray, int x, int y);
-int						mouse_click_hook(int key);
 int						mouse_move_hook(int x, int y, t_env *env);
 t_desc					*ft_read_img(char *str);
 void 					ft_display_minimap(t_env *env);
 void					ft_exit(t_env *env);
+void					*ft_memset(void *b, int c, size_t len);
 void					ft_mvfw(t_env *env);
 void					ft_mvbw(t_env *env);
 void					ft_mvleft(t_env *env);
@@ -137,10 +137,15 @@ void					ft_roleft(t_env *env);
 void					ft_event(t_env *env);
 void					ft_roright(t_env *env);
 void					ft_star(t_env *env);
+void					ft_star2(t_env *env);
 void					ft_lay(t_env *env);
+void					ft_lay2(t_env *env);
 void					ft_init_calc(int px, t_env *env, t_ray *ray);
+void 					ft_del(t_env *env);
 void 					ft_build(t_env *env);
-
+void 					ft_map(t_env *env);
+void 					ft_map2(t_env *env);
+void					ft_memdel(void **ap);
 
 #endif
 

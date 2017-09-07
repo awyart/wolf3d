@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:19:38 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/06 19:49:29 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 11:35:14 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,23 +78,28 @@ int ft_launch(t_env *env)
 	px = 0;
 
 	ft_create_img(env);
-	while (px <= WINX)
+	if (env->drawmap == 1)
+		ft_display_minimap(env);
+	else
 	{
-		ft_init_calc(px, env, &ray);
-		ft_calc_text(env, &ray);
-		ft_calc_floor(env, &ray);
-		py=ray.ymin;
-		while (++py < ray.ymax)
-		 	ft_put_px(env, &ray, px, py);
-		py--;
-		while (++(py) < WINY - 1)
+		while (px <= WINX)
 		{
-			ft_put_px_sol(env, &ray, px, py);
-			ft_put_px_plafond(env, &ray, px, py);
+			ft_init_calc(px, env, &ray);
+			ft_calc_text(env, &ray);
+			ft_calc_floor(env, &ray);
+			py=ray.ymin;
+			while (++py < ray.ymax)
+			 	ft_put_px(env, &ray, px, py);
+			py--;
+			while (++(py) < WINY - 1)
+			{
+				ft_put_px_sol(env, &ray, px, py);
+				ft_put_px_plafond(env, &ray, px, py);
+			}
+			px++;
 		}
-		px++;
 	}
-	ft_display_minimap(env);
+	
 	ft_display_img(env);
 	return (1);
 }

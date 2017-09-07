@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.c                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/04 11:43:55 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 13:40:56 by awyart           ###   ########.fr       */
+/*   Created: 2017/04/11 14:11:28 by awyart            #+#    #+#             */
+/*   Updated: 2017/09/07 11:57:10 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int		mouse_move_hook(int x1, int y1, t_env *env)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	double x;
+	unsigned char	*test;
+	size_t			i;
 
-	if (x1 < 0 || x1 >= WINX || y1 < 0 || y1 >= WINY)
-		return (0);
-	x = ((double)x1 - (double)env->x) / (0.66 * (double)WINX / 50.0);
-	env->x = x1;
-	if (x < 0)
-		ft_roleft(env);
-	else if (x > 0)
-		ft_roright(env);
-	else
-		x = 0;
-	return (0);
+	i = 0;
+	if (len == 0)
+		return (b);
+	test = (unsigned char*)b;
+	while (i < len)
+	{
+		test[i] = (unsigned char)c;
+		i++;
+	}
+	return (b);
 }

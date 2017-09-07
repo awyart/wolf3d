@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 18:02:48 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/06 20:25:24 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 11:41:53 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,25 @@ void ft_event(t_env *env)
 
 void ft_star(t_env *env)
 {
-	env->etoile += 1;
-	env->etoile %= 2;
+	env->etoile = 1;
 	ft_launch(env);
 }
 
-void ft_lay(t_env *env)
+void ft_star2(t_env *env)
 {
-	env->lay += 1;
-	env->lay %= 2;
+	env->etoile = 0;
 	ft_launch(env);
 }
-
 void ft_build(t_env *env)
 {
-	env->map[(int)env->posY][(int)env->posX +1] = 8 + 48;
+	if (env->map[(int)(env->posY + env->dirY)][(int)(env->posX +env->dirX)] == 48)	
+		env->map[(int)(env->posY + env->dirY)][(int)(env->posX +env->dirX + 0.5)] = 8 + 48;
+	ft_launch(env);
+}
+
+void ft_del(t_env *env)
+{
+	if (env->map[(int)(env->posY + env->dirY)][(int)(env->posX +env->dirX)] != 49)
+		env->map[(int)(env->posY + env->dirY)][(int)(env->posX +env->dirX)] = 48;
 	ft_launch(env);
 }

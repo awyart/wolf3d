@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 12:58:27 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/06 19:05:54 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 11:56:21 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_desc 	*ft_read_img(char *str)
 
 	fd = open(str, O_RDONLY);
 	i = 0;
-	memset(&img, 0, sizeof(img));
+	ft_memset(&img, 0, sizeof(img));
 	read(fd, &img, 54);
 	read(fd, trash, img.offset - 54);
 	desc = (t_desc *)malloc(sizeof(t_desc));

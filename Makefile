@@ -6,7 +6,7 @@
 #    By: awyart <awyart@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/28 22:10:59 by awyart            #+#    #+#              #
-#    Updated: 2017/09/06 19:21:14 by awyart           ###   ########.fr        #
+#    Updated: 2017/09/07 13:38:22 by awyart           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ SRC2 = ft_putchar.c \
 	ft_strsub.c \
 	get_next_line.c\
 	ft_memalloc.c \
-	ft_putnbr.c
+	ft_putnbr.c\
+	ft_memset.c\
+	ft_memdel.c
 
 SRC3 = ft_launch.c \
 		putpx.c \
@@ -39,7 +41,8 @@ SRC4 = ft_exit.c \
 		ft_mv.c \
 		mouse.c\
 		event.c\
-		lat.c
+		lat.c \
+		event2.c
 
 SRC5 = read.c
 

@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:27:07 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 16:20:41 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 18:14:30 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <string.h>
+# include <stdio.h>
 # include "mlx.h"
 # include "bmp.h"
 # define BUFF_SIZE 1000
@@ -151,5 +152,6 @@ void					ft_map2(t_env *env);
 void					ft_memdel(void **ap);
 void					ft_free_mem(t_env *env);
 void					ft_errmalloc(void);
+int 					destroy_win_hook(t_env *env);
 
 #endif

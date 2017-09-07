@@ -6,18 +6,43 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:53:43 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 15:03:40 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 17:58:06 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+#include <stdio.h>
 
-void	ft_mvfw(t_env *env)
+static int	ft_check_pos(t_env *env, double k, double l)
 {
-	int i;
+	double	x;
+	double	y;
+	int		i;
+	int		j;
 
-	i = (int)(env->posy + MVSPEED * env->diry);
-	if (env->map[i][(int)(env->posx + MVSPEED * env->dirx)] == 48)
+	x = env->posx;
+	y = env->posy;
+	i = (env->posy + l);
+	j = (env->posx + k);
+	while ((int)x != j && (int)y != i)
+	{
+		x += MVSPEED * env->dirx / 100;
+		y += MVSPEED * env->diry / 100;
+		if (env->map[(int)y][(int)x] != 48)
+			return (0);
+	}
+	return (1);
+}
+
+void		ft_mvfw(t_env *env)
+{
+	double i;
+	double j;
+
+	i = (env->posy + MVSPEED * env->diry);
+	j = (env->posx + MVSPEED * env->dirx);
+	if (env->map[(int)i][(int)j] == 48 &&
+		ft_check_pos(env, MVSPEED * env->dirx, MVSPEED * env->dirx))
 	{
 		env->posx += MVSPEED * env->dirx;
 		env->posy += MVSPEED * env->diry;
@@ -25,12 +50,15 @@ void	ft_mvfw(t_env *env)
 	ft_launch(env);
 }
 
-void	ft_mvbw(t_env *env)
+void		ft_mvbw(t_env *env)
 {
-	int i;
+	double i;
+	double j;
 
-	i = (int)(env->posy - MVSPEED * env->diry);
-	if (env->map[i][(int)(env->posx - MVSPEED * env->dirx)] == 48)
+	i = (env->posy - MVSPEED * env->diry);
+	j = (env->posx - MVSPEED * env->dirx);
+	if (env->map[(int)i][(int)j] == 48 &&
+		ft_check_pos(env, -MVSPEED * env->dirx, -MVSPEED * env->diry))
 	{
 		env->posx -= MVSPEED * env->dirx;
 		env->posy -= MVSPEED * env->diry;
@@ -38,7 +66,7 @@ void	ft_mvbw(t_env *env)
 	ft_launch(env);
 }
 
-void	ft_roright(t_env *env)
+void		ft_roright(t_env *env)
 {
 	double	dx;
 	double	dy;
@@ -60,7 +88,7 @@ void	ft_roright(t_env *env)
 	ft_launch(env);
 }
 
-void	ft_roleft(t_env *env)
+void		ft_roleft(t_env *env)
 {
 	double	dx;
 	double	dy;

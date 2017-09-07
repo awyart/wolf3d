@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 18:54:59 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 16:31:51 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 18:07:28 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,11 @@ void		ft_getsize(t_env *env, char *title)
 	x = 0;
 	y = 0;
 	env->x_max = 0;
-	fd = open(title, O_RDONLY);
+	if (!(fd = open(title, O_RDONLY)))
+	{
+		ft_putstr("carte illisible\n");
+		exit(0);
+	}
 	while (get_next_line(fd, &line) > 0)
 	{
 		y++;

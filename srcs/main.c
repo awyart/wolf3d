@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:14:05 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 16:38:08 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 18:21:35 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,17 +77,27 @@ static int	my_key_func(int keycode, t_env *env)
 	return (0);
 }
 
+static int ft_filexist(char *str)
+{
+	FILE *fd;
+
+	fd = fopen(str, "r+");
+	if (!(fd))
+		return (0);
+	return (1);
+}
+
 int			main(int ac, char **av)
 {
 	t_env env;
-
-	if (ac != 2)
+	
+	if (ac != 2 || !ft_filexist(av[1]))
 		ft_putstr("Le nombre d'argument est incorrect.\n \
 			Merci de charger une map valide en argument\n");
 	else
 	{
-		ft_load_texture(&env);
 		ft_getsize(&(env), av[1]);
+		ft_load_texture(&env);
 		ft_read(&(env), av[1]);
 		ft_checkmap(&env);
 		if (!(ft_init_mlx(&(env))))
@@ -96,9 +106,10 @@ int			main(int ac, char **av)
 		mlx_key_hook(env.win, my_key_func, &(env));
 		mlx_expose_hook(env.win, &ft_launch, &(env));
 		mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &my_key_func, &env);
+		mlx_hook(env.win, 17, 0L, destroy_win_hook, &env);
 		mlx_hook(env.win, 6, (1L << 6), mouse_move_hook, &env);
 		mlx_loop(env.mlx);
+		ft_free_mem(&(env));
 	}
-	ft_free_mem(&(env));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 18:59:14 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/04 11:50:03 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 14:47:29 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,3 @@ void	ft_exit(t_env *env)
 	mlx_destroy_window(env->mlx, env->win);
 	exit(0);
 }
-

@@ -6,7 +6,7 @@
 #    By: awyart <awyart@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/28 22:10:59 by awyart            #+#    #+#              #
-#    Updated: 2017/09/07 13:38:22 by awyart           ###   ########.fr        #
+#    Updated: 2017/09/07 15:08:31 by awyart           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,13 @@ SRC2 = ft_putchar.c \
 
 SRC3 = ft_launch.c \
 		putpx.c \
-		calc.c
+		calc.c \
+		minimap.c
 
 SRC4 = ft_exit.c \
 		ft_mv.c \
 		mouse.c\
 		event.c\
-		lat.c \
 		event2.c
 
 SRC5 = read.c
@@ -55,10 +55,14 @@ SRC = $(patsubst %,srcs//%,$(SRC1)) \
 IPATH = includes
 VPATH = srcs
 
-LIB = /usr/local/lib/libmlx.a
+LIB = sources/minilibx_macos/libmlx.a
 
 all : $(NAME)
 
+lib : 
+	cd sources/minilibx_macos/ && (MAKE)
+
+	
 $(NAME) : $(SRC)
 	@$(CC) $(FLAGS) -o $(NAME) $^ $(LIB) -I $(IPATH) $(GRAPH)
 

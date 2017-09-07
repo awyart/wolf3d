@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 15:45:51 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/06 18:50:40 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 14:30:42 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,31 @@
 
 # pragma pack(push, 1)
 
-typedef struct 		s_img
+typedef struct		s_img
 {
 	short			idfield;
-	unsigned int	SzofBMP;
+	unsigned int	szofbmp;
 	short			as1;
 	short			as2;
 	unsigned int	offset;
-	unsigned int	NbofDIBBytes;
+	unsigned int	nbofdibbytes;
 	int				width;
 	int				height;
-	short			NBcol;
-	short			NBpix;
-	int				BI_BITFIELDS;
-	unsigned int	Szray;
-	int				Resh;
-	int				Resv;
-	unsigned int 	nbpalcol;
+	short			nbcol;
+	short			nbpix;
+	int				bibitfiels;
+	unsigned int	szray;
+	int				resh;
+	int				resv;
+	unsigned int	nbpalcol;
 	unsigned int	impcol;
 }					t_img;
 
 # pragma pack(pop)
 
 typedef struct		s_desc
-{	unsigned char	***img;	
+{
+	unsigned char	***img;
 	int				width;
 	int				height;
 }					t_desc;

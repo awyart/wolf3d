@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:19:38 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 11:35:14 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 15:05:39 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,78 +28,71 @@ static void	ft_create_img(t_env *env)
 	env->pix = mlx_get_data_addr(env->img, &bpp, &sizeline, &endian);
 }
 
-static void ft_calc_text(t_env *env, t_ray *ray)
+static void	ft_calc_text(t_env *env, t_ray *ray)
 {
-	ray->nbtex = env->map[ray->mapY][ray->mapX] - 49;
+	ray->nbtex = env->map[ray->mapy][ray->mapx] - 49;
 	if (ray->side == 0)
-		ray->wallX = ray->posY + ray->wall * ray->dirY;
+		ray->wallx = ray->posy + ray->wall * ray->diry;
 	else
-		ray->wallX = ray->posX + ray->wall * ray->dirX;
-	ray->wallX -= floor(ray->wallX);
-	ray->texX = (int)(ray->wallX * (double)env->desc[ray->nbtex]->width);
-	if (ray->side == 0 && ray->dirX > 0)
-	 	ray->texX = env->desc[ray->nbtex]->width - ray->texX - 1;
-	if (ray->side == 1 && ray->dirY < 0)
-		ray->texX = env->desc[ray->nbtex]->width - ray->texX - 1;
+		ray->wallx = ray->posx + ray->wall * ray->dirx;
+	ray->wallx -= floor(ray->wallx);
+	ray->texx = (int)(ray->wallx * (double)env->desc[ray->nbtex]->width);
+	if (ray->side == 0 && ray->dirx > 0)
+		ray->texx = env->desc[ray->nbtex]->width - ray->texx - 1;
+	if (ray->side == 1 && ray->diry < 0)
+		ray->texx = env->desc[ray->nbtex]->width - ray->texx - 1;
 }
 
-static void ft_calc_floor(t_env *env, t_ray *ray)
+static void	ft_calc_floor(t_env *env, t_ray *ray)
 {
-	if (ray->side == 0 && ray->dirX > 0)
+	if (ray->side == 0 && ray->dirx > 0)
 	{
-		env->floorX = ray->mapX;
-		env->floorY = ray->mapY + ray->wallX; 
+		env->floorx = ray->mapx;
+		env->floory = ray->mapy + ray->wallx;
 	}
-	else if (ray->side == 0 && ray->dirX < 0)
+	else if (ray->side == 0 && ray->dirx < 0)
 	{
-		env->floorX = ray->mapX + 1.0;
-		env->floorY = ray->mapY + ray->wallX; 
+		env->floorx = ray->mapx + 1.0;
+		env->floory = ray->mapy + ray->wallx;
 	}
-	else if (ray->side == 1 && ray->dirY > 0)
+	else if (ray->side == 1 && ray->diry > 0)
 	{
-		env->floorX = ray->mapX + ray->wallX;
-		env->floorY = ray->mapY; 
+		env->floorx = ray->mapx + ray->wallx;
+		env->floory = ray->mapy;
 	}
 	else
 	{
-		env->floorX = ray->mapX + ray->wallX;
-		env->floorY = ray->mapY + 1.0; 
+		env->floorx = ray->mapx + ray->wallx;
+		env->floory = ray->mapy + 1.0;
 	}
-	env->distPlayer = 0.0;
-	env->distWall = ray->wall;
+	env->distwall = ray->wall;
 }
 
-int ft_launch(t_env *env)
+int			ft_launch(t_env *env)
 {
 	int		px;
 	int		py;
 	t_ray	ray;
 
-	px = 0;
-
+	px = -1;
 	ft_create_img(env);
-	if (env->drawmap == 1)
-		ft_display_minimap(env);
-	else
+	while (++px <= WINX)
 	{
-		while (px <= WINX)
+		ft_init_calc(px, env, &ray);
+		ft_calc_text(env, &ray);
+		ft_calc_floor(env, &ray);
+		py = ray.ymin;
+		while (++py < ray.ymax)
+			ft_put_px(env, &ray, px, py);
+		py--;
+		while (++(py) < WINY - 1)
 		{
-			ft_init_calc(px, env, &ray);
-			ft_calc_text(env, &ray);
-			ft_calc_floor(env, &ray);
-			py=ray.ymin;
-			while (++py < ray.ymax)
-			 	ft_put_px(env, &ray, px, py);
-			py--;
-			while (++(py) < WINY - 1)
-			{
-				ft_put_px_sol(env, &ray, px, py);
-				ft_put_px_plafond(env, &ray, px, py);
-			}
-			px++;
+			ft_put_px_sol(env, &ray, px, py);
+			ft_put_px_plafond(env, &ray, px, py);
 		}
+		if (env->drawmap == 1)
+			ft_display_minimap(env);
 	}
-	
 	ft_display_img(env);
 	return (1);
 }

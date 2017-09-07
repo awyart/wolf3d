@@ -6,20 +6,18 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 12:58:27 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 11:56:21 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 15:59:48 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
-#include "../../includes/bmp.h"
+#include "header.h"
+#include "bmp.h"
 
-
-static void ft_read_color(t_img *img, int fd, t_desc *desc)
+static void	ft_read_color(t_img *img, int fd, t_desc *desc)
 {
 	int x;
 	int i;
 	int j;
-
 
 	x = 0;
 	i = 0;
@@ -42,30 +40,50 @@ static void ft_read_color(t_img *img, int fd, t_desc *desc)
 	desc->height = img->height;
 }
 
-t_desc 	*ft_read_img(char *str)
+static void	ft_assign(t_img *img, t_desc *desc)
 {
-	t_desc *desc;
-	char trash[1024];
-	t_img img;
-	int fd;
 	int i;
 	int j;
 
-	fd = open(str, O_RDONLY);
 	i = 0;
+	while (i <= img->height)
+	{
+		if (!(desc->img[i] = (unsigned char**)malloc(
+			sizeof(unsigned char*) * (img->width + 1))))
+			ft_errmalloc();
+		j = -1;
+		while (++j <= img->width)
+		{
+			if (!(desc->img[i][j] = (unsigned char*)malloc(5)))
+				ft_errmalloc();
+		}
+		i++;
+	}
+}
+
+void		ft_errmalloc(void)
+{
+	ft_putstr("un allocation de memoire a echoue\n");
+	exit(0);
+}
+
+t_desc		*ft_read_img(char *str)
+{
+	t_desc	*desc;
+	char	trash[1024];
+	t_img	img;
+	int		fd;
+
+	fd = open(str, O_RDONLY);
 	ft_memset(&img, 0, sizeof(img));
 	read(fd, &img, 54);
 	read(fd, trash, img.offset - 54);
-	desc = (t_desc *)malloc(sizeof(t_desc));
-	desc->img = (unsigned char ***)malloc(sizeof(unsigned char**) * (img.height + 1));
-	while (i <= img.height)
-	{
-		desc->img[i] = (unsigned char**)malloc(sizeof(unsigned char*) * (img.width + 1));
-		j = -1;
-		while (++j <= img.width)
-			desc->img[i][j] = (unsigned char*)malloc(5);
-		i++;
-	}
+	if (!(desc = (t_desc *)malloc(sizeof(t_desc))))
+		ft_errmalloc();
+	if (!(desc->img = (unsigned char ***)malloc(
+			sizeof(unsigned char**) * (img.height + 1))))
+		ft_errmalloc();
+	ft_assign(&img, desc);
 	ft_read_color(&img, fd, desc);
 	close(fd);
 	return (desc);

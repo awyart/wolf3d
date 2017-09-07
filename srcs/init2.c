@@ -6,13 +6,13 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/06 19:19:57 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 11:48:09 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 15:40:44 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void 		ft_checkmap(t_env *env)
+void		ft_checkmap(t_env *env)
 {
 	if (env->x_max <= 3 || env->y_max <= 3)
 	{
@@ -37,4 +37,42 @@ void		ft_load_texture(t_env *env)
 	env->desc[6] = ft_read_img("./texture/ceiling2.bmp");
 	env->desc[7] = ft_read_img("./texture/ceiling.bmp");
 	env->desc[8] = ft_read_img("./texture/pkirsch.bmp");
+}
+
+static void	ft_free_mod(t_env *env)
+{
+	int j;
+
+	j = env->y_max + 3;
+	if (env->map)
+	{
+		while (--j >= 0)
+			ft_memdel((void *)&env->map[j]);
+		ft_memdel((void *)&env->map);
+	}
+}
+
+void		ft_free_mem(t_env *env)
+{
+	int j;
+	int i;
+	int k;
+
+	ft_free_mod(env);
+	k = -1;
+	i = env->desc[k]->width + 1;
+	while (++k < NBIMG)
+	{
+		if (env->desc[k]->img)
+		{
+			while (--i >= 0)
+			{
+				j = env->desc[k]->height + 1;
+				while (--j >= 0)
+					ft_memdel((void *)&env->desc[k]->img[j][i]);
+				ft_memdel((void *)&env->desc[k]->img[j]);
+			}
+			ft_memdel((void *)&env->desc[k]->img);
+		}
+	}
 }

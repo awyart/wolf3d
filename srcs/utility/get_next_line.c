@@ -6,23 +6,13 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/23 15:35:35 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/02 17:20:53 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 15:27:19 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-typedef struct		s_gnl
-{
-	char			*tmp;
-	char			*s;
-	int				fd;
-	struct s_gnl	*head;
-	struct s_gnl	*next;
-	struct s_gnl	*last;
-}					t_gnl;
-
-struct s_gnl		*add_or_find_gnl(struct s_gnl *head, int fd)
+struct s_gnl	*add_or_find_gnl(struct s_gnl *head, int fd)
 {
 	struct s_gnl	*last;
 	struct s_gnl	*curr;
@@ -49,7 +39,8 @@ struct s_gnl		*add_or_find_gnl(struct s_gnl *head, int fd)
 	return (curr);
 }
 
-struct s_gnl		*init_or_finish_gnl(struct s_gnl **gnl, int fd, int init, int ret)
+struct s_gnl	*init_or_finish_gnl(
+	struct s_gnl **gnl, int fd, int init, int ret)
 {
 	struct s_gnl	*tmp;
 
@@ -95,7 +86,7 @@ int				waiting_line(struct s_gnl **g, char **line, char *nl, int ret)
 	return (1);
 }
 
-int						get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
 	static struct s_gnl	*g;
 	char				*buff;

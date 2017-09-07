@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 15:08:00 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 15:09:17 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 16:49:52 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void		ft_display_minimap(t_env *env)
 			{
 				k = 8 * j;
 				l = 8 * i;
-				env->pix[(k * 8) + (l * WINX * 8)] = 255;
-				env->pix[(k * 8) + (l * WINX * 8) + 1] = 255;
-				env->pix[(k * 8) + (l * WINX * 8) + 2] = 255;
+				env->pix[(k * 4) + (l * WINX * 4)] = 255;
+				env->pix[(k * 4) + (l * WINX * 4) + 1] = 255;
+				env->pix[(k * 4) + (l * WINX * 4) + 2] = 255;
 			}
 			j++;
 		}

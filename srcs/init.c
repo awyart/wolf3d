@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 18:54:59 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 15:58:50 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 16:31:51 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ void		ft_read(t_env *env, char *title)
 	while (++x <= env->x_max + 1)
 		env->map[y][x] = 49;
 	env->map[y][x] = '\0';
+	if (line)
+	{
+		free(line);
+		line = NULL;
+	}
 	close(fd);
 }
 
@@ -84,8 +89,13 @@ void		ft_getsize(t_env *env, char *title)
 		if (env->x_max < x)
 			env->x_max = x;
 		if (line)
+		{
 			free(line);
+			line = NULL;
+		}
 	}
+	if (line)
+		free(line);
 	env->y_max = y;
 	close(fd);
 }

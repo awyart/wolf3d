@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 12:58:27 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 15:59:48 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 16:20:54 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ void		ft_errmalloc(void)
 	exit(0);
 }
 
-t_desc		*ft_read_img(char *str)
+void		ft_read_img(char *str, t_desc *desc)
 {
-	t_desc	*desc;
 	char	trash[1024];
 	t_img	img;
 	int		fd;
@@ -78,13 +77,10 @@ t_desc		*ft_read_img(char *str)
 	ft_memset(&img, 0, sizeof(img));
 	read(fd, &img, 54);
 	read(fd, trash, img.offset - 54);
-	if (!(desc = (t_desc *)malloc(sizeof(t_desc))))
-		ft_errmalloc();
 	if (!(desc->img = (unsigned char ***)malloc(
 			sizeof(unsigned char**) * (img.height + 1))))
 		ft_errmalloc();
 	ft_assign(&img, desc);
 	ft_read_color(&img, fd, desc);
 	close(fd);
-	return (desc);
 }

@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:27:07 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 16:00:45 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 16:20:41 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void					ft_put_px(t_env *env, t_ray *ray, int x, int y);
 void					ft_put_px_sol(t_env *env, t_ray *ray, int x, int y);
 void					ft_put_px_plafond(t_env *env, t_ray *ray, int x, int y);
 int						mouse_move_hook(int x, int y, t_env *env);
-t_desc					*ft_read_img(char *str);
+void					ft_read_img(char *str, t_desc *desc);
 void					ft_display_minimap(t_env *env);
 void					ft_exit(t_env *env);
 void					*ft_memset(void *b, int c, size_t len);

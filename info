@@ -1,8 +1,1 @@
-verifier en profonderur la map
-verifier l'image
-securiser les mallocs et les variables
 continuer les leaks
-
-pour les mallocs
-		env->map  : 0 to env->ymax + 2
-		env->map[]: 0 to env->x max + 2 

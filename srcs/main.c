@@ -6,7 +6,7 @@
 /*   By: awyart <awyart@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 16:14:05 by awyart            #+#    #+#             */
-/*   Updated: 2017/09/07 15:40:28 by awyart           ###   ########.fr       */
+/*   Updated: 2017/09/07 16:38:08 by awyart           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			main(int ac, char **av)
 		mlx_hook(env.win, KEY_PRESS, KEY_PRESS_MASK, &my_key_func, &env);
 		mlx_hook(env.win, 6, (1L << 6), mouse_move_hook, &env);
 		mlx_loop(env.mlx);
-		ft_free_mem(&(env));
 	}
+	ft_free_mem(&(env));
 	return (0);
 }
